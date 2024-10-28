@@ -12,7 +12,7 @@ Att tänka på:
 
 3. JS:
     1. Array med ord - LUCAS
-    2. Funktion som slumpar ett ord - MARIA
+  KLAR  2. Funktion som slumpar ett ord - MARIA
     3. Knapp som startar spelet
     4. Funktion där man får skriva in förslag på bokstäver
     5. Funktion som kontrollerar om input(bokstav) stämmer överens med någon bokstav i ordet
@@ -20,10 +20,6 @@ Att tänka på:
     7. Funktion som skriver ut bokstäverna på rätt plats i ordet
     8. Funktion som kollar om man vunnit eller förlorat
     9. Reset-knapp för att börja om från början
-    10. 
-
-
-
 
 
 
