@@ -14,7 +14,8 @@ console.log(wordList);
 
 //loopa igenom ordet för att de som någon bokstav stämmer överens
 document.addEventListener('keydown', (event) =>{
-    console.log('du gissade på ' + event);
+    console.log('du gissade på ' + event.key);
+    compareLetters(event.key)
 })
 
 function compareLetters(randomWord, event) {
@@ -23,7 +24,7 @@ function compareLetters(randomWord, event) {
     for (const letter of wordHangingMan) {
         if (letterGuess == letter) {
             console.log("Rätt!")
-            
+
         } else {
             console.log('Du gissade fel! Försök igen!')
         }
