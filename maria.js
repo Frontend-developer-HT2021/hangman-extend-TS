@@ -10,3 +10,22 @@ function getRandomWord(wordList) {
 console.log(getRandomWord(wordList)); 
 console.log(wordList); 
 
+
+
+//loopa igenom ordet för att de som någon bokstav stämmer överens
+document.addEventListener('keydown', (event) =>{
+    console.log('du gissade på ' + event);
+})
+
+function compareLetters(randomWord, event) {
+    let wordHangingMan = randomWord
+    let letterGuess = event
+    for (const letter of wordHangingMan) {
+        if (letterGuess == letter) {
+            console.log("Rätt!")
+            
+        } else {
+            console.log('Du gissade fel! Försök igen!')
+        }
+    }
+}
