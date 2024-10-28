@@ -61,11 +61,11 @@ document.getElementById('show-popup-button').addEventListener('click', function(
 });
 
 const ground = document.querySelector("#ground");
-const scaffold = document.querySelector("#scaffold");
-const head = document.querySelector("#head");
-const body = document.querySelector("#body");
+const scaffold = document.querySelector("#scaffold"); //huvud
+const head = document.querySelector("#head"); // scaffold
+const body = document.querySelector("#body"); //legs
 const arms = document.querySelector("#arms");
-const legs = document.querySelector("#legs");
+const legs = document.querySelector("#legs"); //body
 
 ground.style.display = "none";
 scaffold.style.display = "none";
