@@ -36,21 +36,25 @@ function getRandomWord(wordArray) {
 
 function compareLetters(word, letterGuess) {
     let found = false
+    let indices = []
 
     
-    console.log(`Hangingman-ord: ${word}`);
-    
-    for (const letter of word) {
-        if (letterGuess == letter) {
-            found = true;
-            console.log(letterGuess==letter);
-            }
-        }
-        
-        if (found) {
-            console.log('Rätt!');        
-        } else {
-            console.log('Du gissade fel, försök igen!');
-            //x.innerText = letterGuess
-        }
+
+for (let index = 0; index < word.length; index++){
+    const letter = word[index]
+
+    if (letterGuess === letter) {
+        found = true;
+        indices.push(index)
     }
+}
+
+if (found) {
+    console.log('Rätt!');        
+} else {
+    console.log('Du gissade fel, försök igen!');
+    //x.innerText = letterGuess
+}
+
+console.log(indices);
+}
