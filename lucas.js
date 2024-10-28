@@ -74,13 +74,13 @@ body.style.display = "none";
 arms.style.display = "none";
 legs.style.display = "none";
 
-console.log(ground, scaffold, head, body, arms, legs);
-
 const allItems = [ground, scaffold, head, body, arms, legs]
 
 function compareLetters(word, letterGuess) {
     let found = false
     let indices = []
+
+    
 
 for (let index = 0; index < word.length; index++){
     const letter = word[index]
@@ -90,14 +90,13 @@ for (let index = 0; index < word.length; index++){
         indices.push(index)
     }
 }
-console.log("Innan shift, allItems:", allItems);
+
 if (found) {
     console.log('Rätt!');        
 } else {
     console.log('Du gissade fel, försök igen!');
     const nextItem = allItems.shift();
-        if (nextItem)
-            console.log("Efter shift, visar:", nextItem); {
+        if (nextItem) {
           nextItem.style.display = "block";
 }
 
