@@ -1,31 +1,55 @@
-let wordList = ["hej", "de", "lorem", "ipsum", "blä", "kom", "då", "lilla", "skit", "korv"];
-getRandomWord(wordList);
+document.addEventListener('DOMContentLoaded', async () => {
+    const wordArray = await loadWords(); // Vänta tills ordlistan är laddad
+    const randomWord = getRandomWord(wordArray); // Slumpa ett ord efter att listan laddats
+    console.log(`Random word: ${randomWord}`);
+    
+    document.addEventListener('keydown', (event) => {
+        console.log('Du gissade på: ' + event.key);
+        compareLetters(randomWord, event.key);
+    });
+});
 
 
-function getRandomWord(wordList) {
-    let randomWord = Math.floor(Math.random() * wordList.length);
-    return wordList.splice(randomWord, 1)[0];    
+async function loadWords() {
+    try {
+        const response = await fetch('ord.txt'); // Hämtar textfilen
+        const text = await response.text(); // Hämtar textinnehållet
+        const wordsArray = text.split('\n').map(word => word.trim()).filter(word => word); // Skapa en array av ord
+
+        return wordsArray
+    
+    } catch (error) {
+        console.error('Fel vid hämtning av ord:', error);
+    }
 }
 
-console.log(getRandomWord(wordList)); 
-console.log(wordList); 
+
+
+function getRandomWord(wordArray) {
+    let randomIndex = Math.floor(Math.random() * wordArray.length); 
+    return wordArray.splice(randomIndex, 1)[0];  
+}
 
 
 
 //loopa igenom ordet för att de som någon bokstav stämmer överens
-document.addEventListener('keydown', (event) =>{
-    console.log('du gissade på ' + event);
-})
 
-function compareLetters(randomWord, event) {
-    let wordHangingMan = randomWord
-    let letterGuess = event
-    for (const letter of wordHangingMan) {
+function compareLetters(word, letterGuess) {
+    let found = false
+
+    
+    console.log(`Hangingman-ord: ${word}`);
+    
+    for (const letter of word) {
         if (letterGuess == letter) {
-            console.log("Rätt!")
-            
-        } else {
-            console.log('Du gissade fel! Försök igen!')
+            found = true;
+            }
         }
+    
+    if (found) {
+        console.log('Rätt!');        
+    } else {
+        console.log('Du gissade fel, försök igen!');
+        //x.innerText = letterGuess
     }
-}
+    }
