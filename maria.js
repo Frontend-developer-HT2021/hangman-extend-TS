@@ -1,19 +1,34 @@
-let wordList = ["hej", "de", "lorem", "ipsum", "blä", "kom", "då", "lilla", "skit", "korv"];
-const randomWord = getRandomWord(wordList)
+document.addEventListener('DOMContentLoaded', async () => {
+    const wordArray = await loadWords(); // Vänta tills ordlistan är laddad
+    const randomWord = getRandomWord(wordArray); // Slumpa ett ord efter att listan laddats
+    console.log(`Random word: ${randomWord}`);
+    
+    document.addEventListener('keydown', (event) => {
+        console.log('Du gissade på: ' + event.key);
+        compareLetters(randomWord, event.key);
+    });
+});
 
-document.addEventListener('keydown', (event) =>{
-    console.log('du gissade på ' + event.key);
-    compareLetters(randomWord, event.key)
-})
 
+async function loadWords() {
+    try {
+        const response = await fetch('ord.txt'); // Hämtar textfilen
+        const text = await response.text(); // Hämtar textinnehållet
+        const wordsArray = text.split('\n').map(word => word.trim()).filter(word => word); // Skapa en array av ord
 
-
-function getRandomWord(wordList) {
-    let randomIndex = Math.floor(Math.random() * wordList.length); 
-    return wordList.splice(randomIndex, 1)[0];  
+        return wordsArray
+    
+    } catch (error) {
+        console.error('Fel vid hämtning av ord:', error);
+    }
 }
 
-console.log(randomWord); 
+
+
+function getRandomWord(wordArray) {
+    let randomIndex = Math.floor(Math.random() * wordArray.length); 
+    return wordArray.splice(randomIndex, 1)[0];  
+}
 
 
 
