@@ -1,32 +1,40 @@
 let wordList = ["hej", "de", "lorem", "ipsum", "blä", "kom", "då", "lilla", "skit", "korv"];
-getRandomWord(wordList);
+const randomWord = getRandomWord(wordList)
+
+document.addEventListener('keydown', (event) =>{
+    console.log('du gissade på ' + event.key);
+    compareLetters(randomWord, event.key)
+})
+
 
 
 function getRandomWord(wordList) {
-    let randomWord = Math.floor(Math.random() * wordList.length);
-    return wordList.splice(randomWord, 1)[0];    
+    let randomIndex = Math.floor(Math.random() * wordList.length); 
+    return wordList.splice(randomIndex, 1)[0];  
 }
 
-console.log(getRandomWord(wordList)); 
-console.log(wordList); 
+console.log(randomWord); 
 
 
 
 //loopa igenom ordet för att de som någon bokstav stämmer överens
-document.addEventListener('keydown', (event) =>{
-    console.log('du gissade på ' + event.key);
-    compareLetters(event.key)
-})
 
-function compareLetters(randomWord, event) {
-    let wordHangingMan = randomWord
-    let letterGuess = event
-    for (const letter of wordHangingMan) {
+function compareLetters(word, letterGuess) {
+    let found = false
+
+    
+    console.log(`Hangingman-ord: ${word}`);
+    
+    for (const letter of word) {
         if (letterGuess == letter) {
-            console.log("Rätt!")
-
-        } else {
-            console.log('Du gissade fel! Försök igen!')
+            found = true;
+            }
         }
+    
+    if (found) {
+        console.log('Rätt!');        
+    } else {
+        console.log('Du gissade fel, försök igen!');
+        //x.innerText = letterGuess
     }
-}
+    }
