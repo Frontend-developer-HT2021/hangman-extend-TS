@@ -8,7 +8,7 @@ Att tänka på:
 ***Att göra:***
 1. HTML-fil med allting som behövs för programmet (klasser utifrån BEM) - JAKOB
     
-2. CSS - JAKOB
+2. CSS - JAKOB & LUCAS
 
 3. JS:
     1. Array med ord - LUCAS

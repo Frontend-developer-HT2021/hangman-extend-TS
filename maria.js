@@ -43,13 +43,14 @@ function compareLetters(word, letterGuess) {
     for (const letter of word) {
         if (letterGuess == letter) {
             found = true;
+            console.log(letterGuess==letter);
             }
         }
-    
-    if (found) {
-        console.log('Rätt!');        
-    } else {
-        console.log('Du gissade fel, försök igen!');
-        //x.innerText = letterGuess
-    }
+        
+        if (found) {
+            console.log('Rätt!');        
+        } else {
+            console.log('Du gissade fel, försök igen!');
+            //x.innerText = letterGuess
+        }
     }
