@@ -82,20 +82,24 @@ function compareLetters(word, letterGuess) { //loopa igenom ordet för att de so
     if (found) {
         console.log('Rätt!'); 
         indices.forEach(i => {
-            letterPosition[i].innerText = letterGuess;})
+            letterPosition[i].innerText = letterGuess.toUpperCase();})// BLIR STORA BOKSTÄVER
     } else if (notAcceptedCharsArray.includes(letterGuess)) {
         console.log("inga sånna");
       } else if (wrongLetterArray.indexOf(letterGuess) === -1) {
         wrongLetterArray.push(letterGuess);
-        letterNoExistContainer.innerHTML += `<p>${letterGuess}</p>`;
+        letterNoExistContainer.innerHTML += `<p>${letterGuess.toUpperCase()}</p>`; // BLIR STORA BOKSTÄVER
 
 
         console.log('Du gissade fel, försök igen!'); //LUCAS
-        const nextItem = allItems.shift();
-            if (nextItem) {
-              nextItem.style.display = "block";
-    } //LUCAS
-        
+            const nextItem = allItems.shift();
+            if (nextItem && allItems.length > 0) {
+                nextItem.style.display = "block";
+                console.log(allItems);      
+            } else {
+                console.log('du förlorade')
+            }   
+
+
     } else {
         alert(`${letterGuess} already exists, try another letter`);
     }
@@ -104,6 +108,7 @@ function compareLetters(word, letterGuess) { //loopa igenom ordet för att de so
 
 
 function showGameOverPopup(hasWon) {
+    
     console.log("showGameOverPopup called");
     const popup = document.querySelector('.game-over-popup');
     const messageElement = document.getElementById('game-over-message');
