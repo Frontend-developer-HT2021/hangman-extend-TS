@@ -67,6 +67,13 @@ header h1 {
 .incorrect-letter-img-content {
   width: 80%;
 }
+.hidden {
+  display: none;
+}
+
+.start-Button {
+  display: block;
+}
 
 .game-over-popup {
   position: fixed;
@@ -80,13 +87,6 @@ header h1 {
   align-items: center;
 } 
 
-.hidden {
-  display: none;
-}
-
-.start-Button {
-  display: block;
-}
 
 .popup-content {
   display: flex;

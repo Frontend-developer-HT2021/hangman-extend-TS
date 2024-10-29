@@ -143,3 +143,29 @@ function endGame(hasWon) {
     console.log("endGame called");
     showGameOverPopup(hasWon);
 }
+
+// Lägg till resetGame-funktionen för att återställa spelet
+function resetGame() {
+    // Dölj popupen
+    const popup = document.querySelector('.game-over-popup');
+    popup.classList.add('hidden');
+    
+    // Återställ spelets variabler och element
+    wrongLetterArray.length = 0;
+    letterNoExistContainer.innerHTML = ''; 
+
+    // Återställ rätt bokstavscontainrar
+    letterPosition.forEach(element => {
+        element.style.display = "none";
+        element.innerText = ''; 
+    });
+
+    // Återställ gallgen (dölj alla delar)
+    allItems.forEach(item => {
+        item.style.display = 'none';
+    });
+    allItems.push(ground, scaffold, head, body, arms, legs);
+
+    // Visa startknappen igen för att börja om
+    startButton.style.display = "block";
+}
