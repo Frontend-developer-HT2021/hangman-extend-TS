@@ -143,3 +143,35 @@ function endGame(hasWon) {
     console.log("endGame called");
     showGameOverPopup(hasWon);
 }
+
+// Återställ spelet till startläget
+function resetGame() {
+    console.log("Resetting game...");
+
+    // Dölj game-over popup
+    const popup = document.querySelector('.game-over-popup');
+    popup.classList.add('hidden');
+
+    // Visa startknappen
+    startButton.classList.remove('hidden');
+    startButton.style.display = 'block';
+
+    // Återställ UI-element
+    letterPosition.forEach(element => {
+        element.style.display = "none"; // Dölj varje bokstavscontainer
+        element.innerText = '';         // Återställ text
+    });
+
+    // Rensa felaktiga gissningar
+    letterNoExistContainer.innerHTML = '';
+
+    // Återställ alla delar av galgen
+    allItems.forEach(item => {
+        item.style.display = 'none';
+    });
+
+    // Återställ spelets statusvariabler
+    wrongLetterArray.length = 0;
+
+    console.log("Game reset complete.");
+}
