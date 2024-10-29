@@ -1,27 +1,29 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    const wordArray = await loadWords(); // Vänta tills ordlistan är laddad
-    const randomWord = getRandomWord(wordArray); // Slumpa ett ord efter att listan laddats
-    console.log(`Random word: ${randomWord}`);
-    displayLetterContainers(randomWord, letterPosition)
-    
-    document.addEventListener('keydown', (event) => {
-        console.log('Du gissade på: ' + event.key);
-        compareLetters(randomWord, event.key);
-    });
+document.addEventListener("DOMContentLoaded", async () => {
+  const wordArray = await loadWords(); // Vänta tills ordlistan är laddad
+  const randomWord = getRandomWord(wordArray); // Slumpa ett ord efter att listan laddats
+  console.log(`Random word: ${randomWord}`);
+  displayLetterContainers(randomWord, letterPosition);
+
+  document.addEventListener("keydown", (event) => {
+    console.log("Du gissade på: " + event.key);
+    compareLetters(randomWord, event.key);
+  });
 });
 
 const wrongLetterArray = [];
 const notAcceptedCharsArray = [];
-const letterPosition = document.querySelectorAll('.correct-letter-container-letter')
+const letterPosition = document.querySelectorAll(
+  ".correct-letter-container-letter"
+);
 const letterNoExistContainer = document.querySelector(
-    ".incorrect-letter-container-letter"
+  ".incorrect-letter-container-letter"
 );
 const ground = document.querySelector("#ground");
 const scaffold = document.querySelector("#scaffold");
-const head = document.querySelector("#head"); 
-const body = document.querySelector("#body"); 
+const head = document.querySelector("#head");
+const body = document.querySelector("#body");
 const arms = document.querySelector("#arms");
-const legs = document.querySelector("#legs"); 
+const legs = document.querySelector("#legs");
 
 ground.style.display = "none";
 scaffold.style.display = "none";
@@ -30,54 +32,60 @@ body.style.display = "none";
 arms.style.display = "none";
 legs.style.display = "none";
 
-const allItems = [ground, scaffold, head, body, arms, legs]
+const allItems = [ground, scaffold, head, body, arms, legs];
 
 async function loadWords() {
-    try {
-        const response = await fetch('ord.txt'); // Hämtar textfilen
-        const text = await response.text(); // Hämtar textinnehållet
-        const wordsArray = text.split('\n').map(word => word.trim()).filter(word => word); // Skapa en array av ord
+  try {
+    const response = await fetch("ord.txt"); // Hämtar textfilen
+    const text = await response.text(); // Hämtar textinnehållet
+    const wordsArray = text
+      .split("\n")
+      .map((word) => word.trim())
+      .filter((word) => word); // Skapa en array av ord
 
-        return wordsArray
-    
-    } catch (error) {
-        console.error('Fel vid hämtning av ord:', error);
-    }
+    return wordsArray;
+  } catch (error) {
+    console.error("Fel vid hämtning av ord:", error);
+  }
 }
 
 function getRandomWord(wordArray) {
-    let randomIndex = Math.floor(Math.random() * wordArray.length); 
-    return wordArray.splice(randomIndex, 1)[0];  
+  let randomIndex = Math.floor(Math.random() * wordArray.length);
+  return wordArray.splice(randomIndex, 1)[0];
 }
 
 //visa rätt antal divvar för bokstäver
 function displayLetterContainers(randomWord) {
-    letterPosition.forEach(element => element.style.display = "none");
+  letterPosition.forEach((element) => (element.style.display = "none"));
 
-    for (let letterContainerIndex = 0; letterContainerIndex < randomWord.length; letterContainerIndex++) {
-        letterPosition[letterContainerIndex].style.display = "block"
-    }
+  for (
+    let letterContainerIndex = 0;
+    letterContainerIndex < randomWord.length;
+    letterContainerIndex++
+  ) {
+    letterPosition[letterContainerIndex].style.display = "block";
+  }
 }
 
+function compareLetters(word, letterGuess) {
+  //loopa igenom ordet för att de som någon bokstav stämmer överens
+  let found = false;
+  let indices = [];
 
-function compareLetters(word, letterGuess) { //loopa igenom ordet för att de som någon bokstav stämmer överens
-    let found = false
-    let indices = []
-    
-    const notAcceptedChars = "!@#$%^&*()+=-[]\\';,./{}|\":<>?";
-    for (let i = 0; i < notAcceptedChars.length; i++) {
-      // console.log(notAcceptedChars[i]);
-      notAcceptedCharsArray.push(notAcceptedChars[i]);
-    }
- 
-    for (let index = 0; index < word.length; index++){
-        const letter = word[index]
+  const notAcceptedChars = "!@#$%^&*()+=-[]\\';,./{}|\":<>?";
+  for (let i = 0; i < notAcceptedChars.length; i++) {
+    // console.log(notAcceptedChars[i]);
+    notAcceptedCharsArray.push(notAcceptedChars[i]);
+  }
 
-        if (letterGuess === letter) {
-            found = true;
-            indices.push(index)  
-        }
+  for (let index = 0; index < word.length; index++) {
+    const letter = word[index];
+
+    if (letterGuess === letter) {
+      found = true;
+      indices.push(index);
     }
+  }
 
     if (found) {
         console.log('Rätt!'); 
@@ -106,7 +114,6 @@ function compareLetters(word, letterGuess) { //loopa igenom ordet för att de so
     console.log(wrongLetterArray);
 }
 
-
 function showGameOverPopup(hasWon) {
     
     console.log("showGameOverPopup called");
@@ -127,6 +134,6 @@ function showGameOverPopup(hasWon) {
 }
 
 function endGame(hasWon) {
-    console.log("endGame called");
-    showGameOverPopup(hasWon);
+  console.log("endGame called");
+  showGameOverPopup(hasWon);
 }
