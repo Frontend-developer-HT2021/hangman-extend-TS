@@ -142,6 +142,7 @@ function showGameOverPopup(hasWon) {
 function endGame(hasWon) {
     console.log("endGame called");
     showGameOverPopup(hasWon);
+    resetGame();
 }
 
 // Återställ spelet till startläget
