@@ -136,3 +136,9 @@ function endGame(hasWon) {
   console.log("endGame called");
   showGameOverPopup(hasWon);
 }
+
+//Att den bara tar emot bokstäver och inga spec-tecken - JAKOB
+// function containsLetter(str) {
+//     return /[a-z]/i.test(str);
+//   }
+//   containsLetter("'");
