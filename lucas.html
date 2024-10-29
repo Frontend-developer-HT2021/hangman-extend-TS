@@ -5,27 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hänga gubbe</title>
     <script src="lucas.js" defer></script>
-    <link rel="stylesheet" href="./lucas.css" />
+    <link rel="stylesheet" href="lucas.css" />
   </head>
   <body>
     <header>
       <h1>Kung-Fu Dolphins Hängagubbe</h1>
     </header>
+    <button class="start-button hidden">Starta Spelet</button>
     <main class="main-content">
       <section class="incorrect-letter-container">
         <h1 class="incorrect-letter-container-header">Incorrect letters</h1>
         <section class="incorrect-letter-container-letter-wrapper">
-          <p class="incorrect-letter-container-letter">A</p>
-          <p class="incorrect-letter-container-letter">B</p>
+          <p class="incorrect-letter-container-letter"></p>
         </section>
       </section>
       <section class="correct-letter-container">
-        <div class="correct-letter-container-letter"></div>
-        <div class="correct-letter-container-letter"></div>
-        <div class="correct-letter-container-letter"></div>
-        <div class="correct-letter-container-letter"></div>
-        <div class="correct-letter-container-letter"></div>
-        <div class="correct-letter-container-letter"></div>
+        <div class="correct-letter-container-letter letter-position-1"></div>
+        <div class="correct-letter-container-letter letter-position-2"></div>
+        <div class="correct-letter-container-letter letter-position-3"></div>
+        <div class="correct-letter-container-letter letter-position-4"></div>
+        <div class="correct-letter-container-letter letter-position-5"></div>
+        <div class="correct-letter-container-letter letter-position-6"></div>
       </section>
       <section class="incorrect-letter-img">
         <svg
@@ -79,8 +79,6 @@
           />
         </svg>
       </section>
-      <button id="show-popup-button">Visa Pop-up</button>
-
       <div class="game-over-popup hidden">
         <div class="popup-content">
             <p id="game-over-message"></p>

@@ -148,7 +148,6 @@ acetyl
 ackja
 ackord
 action
-ad hoc
 adagio
 addend
 addera
@@ -1102,7 +1101,6 @@ bleka
 bleke
 blekna
 blemma
-bli av
 blick
 blicka
 blid
@@ -2091,10 +2089,6 @@ doula
 dovhet
 down
 doyen
-dra av
-dra in
-dra på
-dra ut
 drabba
 draft
 drafta
@@ -2330,7 +2324,6 @@ dåsa
 dåsig
 dåtid
 dåtida
-dö ut
 döda
 dödbok
 dödis
@@ -2675,7 +2668,6 @@ fansin
 fant
 fantom
 fara
-fara i
 farad
 farao
 farbar
@@ -3314,7 +3306,6 @@ fäste
 fästig
 fästmö
 fäsör
-få ut
 fåfäng
 fågel
 fåle
@@ -3517,9 +3508,6 @@ gauss
 gavel
 gavial
 gavott
-ge sig
-ge upp
-ge ut
 gebit
 gecko
 gegga
@@ -4032,13 +4020,6 @@ gäspa
 gäspig
 gäst
 gästa
-gå an
-gå med
-gå ner
-gå på
-gå upp
-gå ut
-gå åt
 gåbock
 gående
 gågata
@@ -4078,7 +4059,6 @@ gördel
 gördla
 görlig
 götisk
-ha sig
 habil
 habit
 hack
@@ -4202,7 +4182,6 @@ heat
 heden
 heder
 hedra
-hej då
 heja
 hejans
 hejare
@@ -4703,15 +4682,6 @@ hövas
 hövisk
 hövlig
 hövålm
-i akt
-i dag
-i fjol
-i fjor
-i fred
-i går
-i jåns
-i land
-i natt
 iaktta
 iber
 ibidem
@@ -4784,7 +4754,6 @@ import
 impost
 impuls
 imrör
-in spe
 inavel
 inbaka
 inbodd
@@ -4944,7 +4913,6 @@ ironi
 irra
 irreal
 irrväg
-isa av
 isande
 isas
 isbana
@@ -5621,10 +5589,6 @@ klyka
 klynne
 klys
 klyva
-klä av
-klä om
-klä på
-klä ut
 kläcka
 klädd
 kläde
@@ -6826,7 +6790,6 @@ lupin
 lupp
 lupus
 lura
-lura i
 luras
 lurig
 luring
@@ -9427,7 +9390,6 @@ rauk
 ravin
 rayon
 razzia
-rea ut
 reabok
 real
 reale
@@ -9646,7 +9608,6 @@ rivas
 riveri
 rivig
 rivsår
-ro upp
 road
 roadie
 robe
@@ -9860,10 +9821,6 @@ rävlya
 rävröd
 rävsax
 rävtik
-rå för
-rå om
-rå på
-rå sig
 råband
 råbiff
 råbock
@@ -10117,12 +10074,6 @@ scones
 scoop
 scout
 scouta
-se ner
-se om
-se på
-se sig
-se upp
-se ut
 seans
 sebar
 sebu
@@ -10836,13 +10787,6 @@ släppa
 slät
 släta
 slätt
-slå an
-slå av
-slå i
-slå in
-slå om
-slå på
-slå ut
 slån
 slåss
 slått
@@ -11003,7 +10947,6 @@ snits
 snitsa
 snitt
 snitta
-sno på
 snoa
 snobb
 snobba
@@ -11316,11 +11259,8 @@ spröjs
 spröt
 spurt
 spurta
-spy ut
 spya
 spydig
-spä på
-spä ut
 späck
 späcka
 späd
@@ -11638,10 +11578,6 @@ stätta
 stäv
 stäva
 stävja
-stå bi
-stå i
-stå på
-stå ut
 ståbas
 ståhej
 stål
@@ -11851,7 +11787,6 @@ svår
 swap
 sweet
 swing
-sy in
 sybord
 sybåge
 syda
@@ -12036,18 +11971,6 @@ sötsak
 sötsug
 sötsur
 söva
-ta av
-ta i
-ta in
-ta itu
-ta med
-ta ner
-ta på
-ta sig
-ta upp
-ta ut
-ta vid
-ta åt
 tabb
 tabba
 tabbe
@@ -12184,7 +12107,6 @@ taxera
 taxi
 taxikö
 tazett
-te sig
 teak
 team
 teater
@@ -12793,7 +12715,6 @@ tusen
 tuss
 tussa
 tuta
-tuta i
 tuting
 tutsi
 tutt
@@ -12841,7 +12762,6 @@ tweed
 tweet
 twist
 twista
-ty sig
 tycka
 tyckas
 tycke
@@ -13768,7 +13688,6 @@ vävbom
 väveri
 vävnad
 växa
-växa i
 växel
 växla
 växt
@@ -14035,7 +13954,6 @@ zygot
 åhoj
 åhåga
 åhöra
-åka på
 åkalla
 åkant
 åkare
@@ -14153,7 +14071,6 @@ zygot
 ögla
 ögna
 ögrupp
-öka ut
 öken
 öknamn
 ökning
@@ -14200,8 +14117,6 @@ zygot
 örtsås
 örtte
 örtug
-ösa på
-ösa ut
 ösig
 öskar
 ösning
@@ -14214,7 +14129,6 @@ zygot
 östra
 östron
 östzon
-öva in
 över
 överge
 övergå
