@@ -1,39 +1,46 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  font-family: math;
+  font-family: "Exo", serif;
 }
 body {
-  background-color: green;
+  background-color: rgb(60, 100, 159);
   height: 100vh;
   padding: 2rem;
 }
-header {
-  margin-top: 4rem;
-}
+
 header h1 {
   text-align: center;
 }
 .main-content {
-  margin-top: 4rem;
+  height: 80vh;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 .incorrect-letter-container {
   width: 25%;
   padding: 1rem;
+  height: 40%;
+  border-radius: 2rem;
   border: 3px solid black;
 }
 .incorrect-letter-container-header {
   text-align: center;
 }
-
-.incorrect-letter-container-letter {
-  font-size: 5rem;
-  margin: 0.5rem;
-  display: flex;
+/* .incorrect-letter-container-letter-wrapper {
   display: flex;
   flex-wrap: wrap;
+} */
+.incorrect-letter-container-letter {
+  font-size: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+.incorrect-letter-container-letter p {
+  margin: 0.75rem;
+  font-size: 2.5rem;
+  font-weight: bolder;
 }
 
 /* .correct-letter-container {
@@ -52,20 +59,22 @@ header h1 {
 
 .correct-letter-container-letter {
   display: flex;
+  flex-wrap: wrap;
   text-align: center;
   border: 3px solid black;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   width: 5rem;
   height: 5rem;
-  font-family: monospace;
-  font-size: 3rem;
+  font-size: 2.5rem;
+  font-weight: bolder;
 }
 
 .incorrect-letter-img {
   width: 25%;
 }
 .incorrect-letter-img-content {
-  width: 80%;
+  width: 90%;
+  height: 100%;
 }
 
 .game-over-popup {
@@ -78,7 +87,7 @@ header h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-} 
+}
 
 .hidden {
   display: none;
@@ -102,5 +111,41 @@ header h1 {
 }
 
 .popup__content--loss {
-  background-color: lightcoral
+  background-color: lightcoral;
+}
+
+@media screen and (max-width: 1330px) {
+  .main-content {
+    flex-direction: column;
+    align-items: center;
+    height: 90vh;
+  }
+  .incorrect-letter-container {
+    width: 70%;
+    height: 30%;
+  }
+  .correct-letter-container {
+    width: 80%;
+  }
+  .incorrect-letter-img {
+    width: 50%;
+    height: 40%;
+  }
+  .correct-letter-container-letter {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .correct-letter-container-letter {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .correct-letter-container-letter {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
 }
