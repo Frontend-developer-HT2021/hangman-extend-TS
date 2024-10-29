@@ -95,13 +95,13 @@ function compareLetters(word, letterGuess) {
   if (found) {
     console.log("Rätt!");
     indices.forEach((i) => {
-      letterPosition[i].innerText = letterGuess;
+      letterPosition[i].innerText = letterGuess.toUpperCase();
     });
   } else if (notAcceptedCharsArray.includes(letterGuess)) {
     console.log("inga sånna");
   } else if (wrongLetterArray.indexOf(letterGuess) === -1) {
     wrongLetterArray.push(letterGuess);
-    letterNoExistContainer.innerHTML += `<p>${letterGuess}</p>`;
+    letterNoExistContainer.innerHTML += `<p>${letterGuess.toUpperCase()}</p>`;
 
     console.log("Du gissade fel, försök igen!"); //LUCAS
     const nextItem = allItems.shift();

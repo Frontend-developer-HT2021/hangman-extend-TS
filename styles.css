@@ -8,9 +8,7 @@ body {
   height: 100vh;
   padding: 2rem;
 }
-header {
-  height: 10vh;
-}
+
 header h1 {
   text-align: center;
 }
