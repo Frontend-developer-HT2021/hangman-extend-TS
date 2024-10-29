@@ -3,7 +3,7 @@ const startButton = document.querySelector(".start-button");
 const wrongLetterArray = [];
 const notAcceptedCharsArray = [];
 const letterNoExistContainer = document.querySelector(".incorrect-letter-container-letter");
-const letterGuessMessage = document.querySelector(".letter-message");
+const letterGuessMessage = document.querySelector(".letter-message"); //NY
 const letterPosition = document.querySelectorAll('.correct-letter-container-letter')
 letterPosition.forEach(element => element.style.display = "none");
 
@@ -98,37 +98,37 @@ function compareLetters(word, letterGuess) {
     }
     
     if (found && rightGuesses.includes(letterGuess)) {
-        letterGuessMessage.innerText = `${letterGuess.toUpperCase()} är redan vald, prova en annan bokstav!`
+        letterGuessMessage.innerText = `${letterGuess.toUpperCase()} är redan vald, prova en annan bokstav!` //NY
 
     } else if (found) {
-        letterGuessMessage.innerText = `RÄTT! Fortsätt så!`
+        letterGuessMessage.innerText = `RÄTT! Fortsätt så!`//NY
         indices.forEach(i => {
         letterPosition[i].innerText = letterGuess.toUpperCase();})
         rightGuesses.push(letterGuess)                
         
     } else if (notAcceptedCharsArray.includes(letterGuess)) {
-        letterGuessMessage.innerText = `Inga specialtecken eller siffror! Prova igen!`
+        letterGuessMessage.innerText = `Inga specialtecken eller siffror! Prova igen!` //NY
         
     } else if (wrongLetterArray.indexOf(letterGuess) === -1) {
         wrongLetterArray.push(letterGuess);
-        letterGuessMessage.innerText = `${letterGuess.toUpperCase()} finns inte med i ordet, prova igen!`
+        letterGuessMessage.innerText = `${letterGuess.toUpperCase()} finns inte med i ordet, prova igen!` //NY
         letterNoExistContainer.innerHTML += `<p>${letterGuess.toUpperCase()}</p>`;
-        hangingMan()
+        hangingMan() //NY
         
     } else {
-        letterGuessMessage.innerText = `${letterGuess.toUpperCase()} är redan vald, prova en annan bokstav!`
+        letterGuessMessage.innerText = `${letterGuess.toUpperCase()} är redan vald, prova en annan bokstav!` //NY
     }
     
-    examineWordGuess(rightGuesses, word) 
+    examineWordGuess(rightGuesses, word) //NY
 }
 
-function examineWordGuess(rightGuesses, word) {
+function examineWordGuess(rightGuesses, word) {//NY
     if(rightGuesses.length === word.length) {
         showGameOverPopup('gamewon')
     } 
 }
 
-function hangingMan() {
+function hangingMan() {//NY
     const nextItem = allItems.shift();
     if (nextItem && allItems.length == 0) {
         nextItem.style.display = "block";
