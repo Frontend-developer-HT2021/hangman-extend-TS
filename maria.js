@@ -1,29 +1,21 @@
-document.addEventListener("DOMContentLoaded", async () => {
-  const wordArray = await loadWords(); // Vänta tills ordlistan är laddad
-  const randomWord = getRandomWord(wordArray); // Slumpa ett ord efter att listan laddats
-  console.log(`Random word: ${randomWord}`);
-  displayLetterContainers(randomWord, letterPosition);
 
-  document.addEventListener("keydown", (event) => {
-    console.log("Du gissade på: " + event.key);
-    compareLetters(randomWord, event.key);
-  });
-});
-
+const startButton = document.querySelector(".start-button");
 const wrongLetterArray = [];
 const notAcceptedCharsArray = [];
-const letterPosition = document.querySelectorAll(
-  ".correct-letter-container-letter"
-);
-const letterNoExistContainer = document.querySelector(
-  ".incorrect-letter-container-letter"
-);
+const letterNoExistContainer = document.querySelector(".incorrect-letter-container-letter");
+const letterGuessMessage = document.querySelector(".letter-message");
+const letterPosition = document.querySelectorAll('.correct-letter-container-letter')
+letterPosition.forEach(element => element.style.display = "none");
+
+
 const ground = document.querySelector("#ground");
 const scaffold = document.querySelector("#scaffold");
-const head = document.querySelector("#head");
-const body = document.querySelector("#body");
+const head = document.querySelector("#head"); 
+const body = document.querySelector("#body"); 
 const arms = document.querySelector("#arms");
-const legs = document.querySelector("#legs");
+const legs = document.querySelector("#legs"); 
+const allItems = [ground, scaffold, head, body, arms, legs]
+let rightGuesses = [];
 
 ground.style.display = "none";
 scaffold.style.display = "none";
@@ -31,109 +23,145 @@ head.style.display = "none";
 body.style.display = "none";
 arms.style.display = "none";
 legs.style.display = "none";
+startButton.style.display = "block";
 
-const allItems = [ground, scaffold, head, body, arms, legs];
+
+
+startButton.addEventListener('click', startGame, async () => {
+    const wordArray = await loadWords(); 
+    const randomWord = getRandomWord(wordArray); 
+    console.log(`Random word: ${randomWord}`);
+    return randomWord
+});
+
 
 async function loadWords() {
-  try {
-    const response = await fetch("ord.txt"); // Hämtar textfilen
-    const text = await response.text(); // Hämtar textinnehållet
-    const wordsArray = text
-      .split("\n")
-      .map((word) => word.trim())
-      .filter((word) => word); // Skapa en array av ord
+    try {
+        const response = await fetch('ord.txt'); // Hämtar textfilen
+        const text = await response.text(); // Hämtar textinnehållet
+        const wordsArray = text.split('\n').map(word => word.trim()).filter(word => word); // Skapa en array av ord
+        
+        return wordsArray    
+    } catch (error) {
+        console.error('Fel vid hämtning av ord:', error);
+    }
+}
 
-    return wordsArray;
-  } catch (error) {
-    console.error("Fel vid hämtning av ord:", error);
-  }
+function startGame() {
+    startButton.classList.remove('hidden');
+    startButton.style.display = 'none';
+    
+    loadWords().then(wordsArray => {
+        const randomWord = getRandomWord(wordsArray); 
+        console.log("Random word:", randomWord);
+        
+        displayLetterContainers(randomWord);
+
+        document.addEventListener('keydown', (event) => {
+            console.log('Du gissade på: ' + event.key);
+            compareLetters(randomWord, event.key);
+        });
+        
+    }).catch(error => {
+        console.error("Failed to load words:", error);
+    });
 }
 
 function getRandomWord(wordArray) {
-  let randomIndex = Math.floor(Math.random() * wordArray.length);
-  return wordArray.splice(randomIndex, 1)[0];
+    let randomIndex = Math.floor(Math.random() * wordArray.length); 
+    return wordArray.splice(randomIndex, 1)[0];  
 }
 
-//visa rätt antal divvar för bokstäver
 function displayLetterContainers(randomWord) {
-  letterPosition.forEach((element) => (element.style.display = "none"));
-
-  for (
-    let letterContainerIndex = 0;
-    letterContainerIndex < randomWord.length;
-    letterContainerIndex++
-  ) {
-    letterPosition[letterContainerIndex].style.display = "block";
-  }
+    for (let letterContainerIndex = 0; letterContainerIndex < randomWord.length; letterContainerIndex++) {
+        letterPosition[letterContainerIndex].style.display = "block"
+    }
 }
 
 function compareLetters(word, letterGuess) {
-  //loopa igenom ordet för att de som någon bokstav stämmer överens
-  let found = false;
-  let indices = [];
+    let found = false
+    let indices = []
+    const notAcceptedChars = "!@#$%^&*()+=-[]\\';,./{}|\":<>?";
 
-  const notAcceptedChars = "!@#$%^&*()+=-[]\\';,./{}|\":<>?";
-  for (let i = 0; i < notAcceptedChars.length; i++) {
-    // console.log(notAcceptedChars[i]);
+
+    for (let i = 0; i < notAcceptedChars.length; i++) {
     notAcceptedCharsArray.push(notAcceptedChars[i]);
-  }
-
-  for (let index = 0; index < word.length; index++) {
-    const letter = word[index];
-
-    if (letterGuess === letter) {
-      found = true;
-      indices.push(index);
     }
-  }
 
-    if (found) {
-        console.log('Rätt!'); 
+    for (let index = 0; index < word.length; index++){
+        const letter = word[index]
+
+        if (letterGuess === letter) {
+            found = true;
+            indices.push(index) 
+        }
+    }
+    
+    if (found && rightGuesses.includes(letterGuess)) {
+        letterGuessMessage.innerText = `${letterGuess.toUpperCase()} är redan vald, prova en annan bokstav!`
+
+    } else if (found) {
+        letterGuessMessage.innerText = `RÄTT! Fortsätt så!`
         indices.forEach(i => {
-            letterPosition[i].innerText = letterGuess.toUpperCase();})// BLIR STORA BOKSTÄVER
+        letterPosition[i].innerText = letterGuess.toUpperCase();})
+        rightGuesses.push(letterGuess)                
+        
     } else if (notAcceptedCharsArray.includes(letterGuess)) {
-        console.log("inga sånna");
-      } else if (wrongLetterArray.indexOf(letterGuess) === -1) {
+        letterGuessMessage.innerText = `Inga specialtecken eller siffror! Prova igen!`
+        
+    } else if (wrongLetterArray.indexOf(letterGuess) === -1) {
         wrongLetterArray.push(letterGuess);
-        letterNoExistContainer.innerHTML += `<p>${letterGuess.toUpperCase()}</p>`; // BLIR STORA BOKSTÄVER
-
-
-        console.log('Du gissade fel, försök igen!'); //LUCAS
-            const nextItem = allItems.shift();
-            if (nextItem && allItems.length > 0) {
-                nextItem.style.display = "block";
-                console.log(allItems);      
-            } else {
-                console.log('du förlorade')
-            }   
-
-
+        letterGuessMessage.innerText = `${letterGuess.toUpperCase()} finns inte med i ordet, prova igen!`
+        letterNoExistContainer.innerHTML += `<p>${letterGuess.toUpperCase()}</p>`;
+        hangingMan()
+        
     } else {
-        alert(`${letterGuess} already exists, try another letter`);
+        letterGuessMessage.innerText = `${letterGuess.toUpperCase()} är redan vald, prova en annan bokstav!`
     }
-    console.log(wrongLetterArray);
+    
+    examineWordGuess(rightGuesses, word) 
 }
 
-function showGameOverPopup(hasWon) {
-    
-    console.log("showGameOverPopup called");
-    const popup = document.querySelector('.game-over-popup');
-    const messageElement = document.getElementById('game-over-message');
-    const popupContent = document.querySelector('.popup-content');
-    
-    if (hasWon) {
-        messageElement.textContent = "Grattis, du vann! 🎉";
-        popupContent.classList.add('popup__content--win');
-        popupContent.classList.remove('popup__content--loss');
-    } else {
-        messageElement.textContent = "Tyvärr, du förlorade. 😢";
-        popupContent.classList.add('popup__content--loss');
-        popupContent.classList.remove('popup__content--win'); 
-    }
-    popup.classList.remove('hidden');
+function examineWordGuess(rightGuesses, word) {
+    if(rightGuesses.length === word.length) {
+        showGameOverPopup('gamewon')
+    } 
 }
 
-function endGame(hasWon) {
-  console.log("endGame called");
-  showGameOverPopup(hasWon);
+function hangingMan() {
+    const nextItem = allItems.shift();
+    if (nextItem && allItems.length == 0) {
+        nextItem.style.display = "block";
+        showGameOverPopup ('gamelost')
+    } else if (nextItem) {
+    nextItem.style.display = "block";                
+    }
+}
+
+//TA BORT
+/* function endGame(hasWon) {
+    console.log("endGame called");
+    showGameOverPopup(hasWon);
+} */ 
+
+function showGameOverPopup(gameOver) {
+console.log("showGameOverPopup called");
+const popup = document.querySelector('.game-over-popup');
+const messageElement = document.getElementById('game-over-message');
+const popupContent = document.querySelector('.popup-content');
+
+if (gameOver === 'gamewon') {
+    messageElement.textContent = "Grattis, du vann! 🎉";
+    popupContent.classList.add('popup__content--win');
+    popupContent.classList.remove('popup__content--loss');
+} else if (gameOver === 'gamelost'){
+    messageElement.textContent = "Tyvärr, du förlorade. 😢";
+    popupContent.classList.add('popup__content--loss');
+    popupContent.classList.remove('popup__content--win'); 
+} else {
+    console.log('errrrror')
+}
+
+
+popup.classList.remove('hidden');
 }
