@@ -99,8 +99,8 @@ const wrongLetterArray = [];
 const notAcceptedCharsArray = [];
 function compareLetters(word, letterGuess) {
   let found = false;
-
   const notAcceptedChars = "!@#$%^&*()+=-[]\\';,./{}|\":<>?";
+
   for (let i = 0; i < notAcceptedChars.length; i++) {
     // console.log(notAcceptedChars[i]);
     notAcceptedCharsArray.push(notAcceptedChars[i]);
