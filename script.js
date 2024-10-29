@@ -139,6 +139,6 @@ function endGame(hasWon) {
 
 //Att den bara tar emot bokstäver och inga spec-tecken - JAKOB
 // function containsLetter(str) {
-//     return /[a-z]/i.test(str);
+//     return /[a-zåäö]/i.test(str); //la till åäö!
 //   }
 //   containsLetter("'");
