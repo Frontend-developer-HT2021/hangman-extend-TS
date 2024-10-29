@@ -1,5 +1,3 @@
-
-
 document.addEventListener('DOMContentLoaded', async () => {
     const wordArray = await loadWords(); // Vänta tills ordlistan är laddad
     const randomWord = getRandomWord(wordArray); // Slumpa ett ord efter att listan laddats
