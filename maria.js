@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const wordArray = await loadWords(); // Vänta tills ordlistan är laddad
     const randomWord = getRandomWord(wordArray); // Slumpa ett ord efter att listan laddats
     console.log(`Random word: ${randomWord}`);
+    displayLetterContainers(randomWord, letterPosition)
     
     document.addEventListener('keydown', (event) => {
         console.log('Du gissade på: ' + event.key);
@@ -11,22 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 });
 
-const letterPositionOne = document.querySelector('.letter-position-1')
-const letterPositionTwo = document.querySelector('.letter-position-2')
-const letterPositionThree = document.querySelector('.letter-position-3')
-const letterPositionFour = document.querySelector('.letter-position-4')
-const letterPositionFive = document.querySelector('.letter-position-5')
-const letterPositionSix = document.querySelector('.letter-position-6')
-
-console.log(letterPositionOne);
-
-
-letterPositionOne.style.display = "none";
-letterPositionTwo.style.display = "none";
-letterPositionThree.style.display = "none";
-letterPositionFour.style.display = "none";
-letterPositionFive.style.display = "none";
-letterPositionSix.style.display = "none";
+const letterPosition = document.querySelectorAll('.correct-letter-container-letter')
 
 async function loadWords() {
     try {
@@ -52,32 +38,34 @@ function getRandomWord(wordArray) {
 
 //visa rätt antal divvar för bokstäver
 function displayLetterContainers(randomWord) {
-    let wordLength = [];
-    
+    letterPosition.forEach(element => element.style.display = "none");
+
+    for (let letterContainerIndex = 0; letterContainerIndex < randomWord.length; letterContainerIndex++) {
+        letterPosition[letterContainerIndex].style.display = "block"
+    }
+
 }
 
 //loopa igenom ordet för att de som någon bokstav stämmer överens
-
 function compareLetters(word, letterGuess) {
     let found = false
     let indices = []
+ 
+    for (let index = 0; index < word.length; index++){
+        const letter = word[index]
 
-    
-
-for (let index = 0; index < word.length; index++){
-    const letter = word[index]
-
-    if (letterGuess === letter) {
-        found = true;
-        indices.push(index)
+        if (letterGuess === letter) {
+            found = true;
+            indices.push(index)  
+        }
     }
-}
 
-if (found) {
-    console.log('Rätt!');        
-} else {
-    console.log('Du gissade fel, försök igen!');
-}
-
-console.log(indices);
+    if (found) {
+        console.log('Rätt!'); 
+        indices.forEach(i => {
+            letterPosition[i].innerText = letterGuess;
+        })
+    } else {
+        console.log('Du gissade fel, försök igen!');
+    }
 }
