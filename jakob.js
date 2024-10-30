@@ -1,78 +1,38 @@
-// let wordList = [
-//   "hej",
-//   "de",
-//   "lorem",
-//   "ipsum",
-//   "blä",
-//   "kom",
-//   "då",
-//   "lilla",
-//   "skit",
-//   "korv",
-// ];
-
-// let newWord = "";
-
-// const letterNoExistContainer = document.querySelector(
-//   ".incorrect-letter-container-letter"
-// );
-// const ground = document.querySelector("#ground");
-// const head = document.querySelector("#head");
-// const body = document.querySelector("#body");
-// const arms = document.querySelector("#arms");
-// const legs = document.querySelector("#legs");
-// const scaffold = document.querySelector("#scaffold");
-// // const existingWordBox = document.querySelector(
-// //   ".correct-letter-container-letter"
-// // );
-// //   existingWordBox.innerHTML = `<div class="correct-letter-container-letter"></div>`
-// // när randomword körs, så skapas ett word newWord, .length på den ska in i antal
-// //ordboxar så de kmr ut på skärmen
-// function getRandomWord(wordList) {
-//   let randomNumber = Math.floor(Math.random() * wordList.length);
-//   let randomWord = wordList.splice(randomNumber, 1)[0];
-//   newWord = randomWord;
-
-//   return newWord;
-// }
-// getRandomWord(wordList);
-// console.log(newWord);
-
-// // console.log(typeof getRandomWord(wordList));
-
-// //loopa igenom ordet för att de som någon bokstav stämmer överens
-// function handleSameLetter() {
-//   //loop här
-
-//   document.addEventListener("keydown", (event) => {
-//     letter = event.key;
-//     console.log(letter);
-//     if (newWord.includes(letter)) {
-//       console.log("ja");
-//     } else {
-//       console.log("nej");
-//       letterNoExistContainer.innerHTML += `<p>${letter}</p>`;
-//       ground.style.display = "block";
-//       // hur gör jag för o loopa dettta hela tiden?
-//     }
-//   });
-// }
-// handleSameLetter();
-
-// //fixa så boksttäver kommer i fel box dem man svart fel på!
-const letterNoExistContainer = document.querySelector(
-  ".incorrect-letter-container-letter"
-);
 document.addEventListener("DOMContentLoaded", async () => {
   const wordArray = await loadWords(); // Vänta tills ordlistan är laddad
   const randomWord = getRandomWord(wordArray); // Slumpa ett ord efter att listan laddats
   console.log(`Random word: ${randomWord}`);
+  displayLetterContainers(randomWord, letterPosition);
 
   document.addEventListener("keydown", (event) => {
     console.log("Du gissade på: " + event.key);
     compareLetters(randomWord, event.key);
   });
 });
+
+const wrongLetterArray = [];
+const notAcceptedCharsArray = [];
+const letterPosition = document.querySelectorAll(
+  ".correct-letter-container-letter"
+);
+const letterNoExistContainer = document.querySelector(
+  ".incorrect-letter-container-letter"
+);
+const ground = document.querySelector("#ground");
+const scaffold = document.querySelector("#scaffold");
+const head = document.querySelector("#head");
+const body = document.querySelector("#body");
+const arms = document.querySelector("#arms");
+const legs = document.querySelector("#legs");
+
+ground.style.display = "none";
+scaffold.style.display = "none";
+head.style.display = "none";
+body.style.display = "none";
+arms.style.display = "none";
+legs.style.display = "none";
+
+const allItems = [ground, scaffold, head, body, arms, legs];
 
 async function loadWords() {
   try {
@@ -94,37 +54,97 @@ function getRandomWord(wordArray) {
   return wordArray.splice(randomIndex, 1)[0];
 }
 
-//loopa igenom ordet för att de som någon bokstav stämmer överens
-const wrongLetterArray = [];
-const notAcceptedCharsArray = [];
-function compareLetters(word, letterGuess) {
-  let found = false;
-  const notAcceptedChars = "!@#$%^&*()+=-[]\\';,./{}|\":<>?";
+//visa rätt antal divvar för bokstäver
+function displayLetterContainers(randomWord) {
+  letterPosition.forEach((element) => (element.style.display = "none"));
 
+  for (
+    let letterContainerIndex = 0;
+    letterContainerIndex < randomWord.length;
+    letterContainerIndex++
+  ) {
+    // letterPosition[letterContainerIndex].style.display = "block"
+    letterPosition[letterContainerIndex].style.display = "flex";
+    letterPosition[letterContainerIndex].style.justifyContent = "center";
+    letterPosition[letterContainerIndex].style.alignItems = "center";
+
+    // ändrade här // jakob
+  }
+}
+
+function compareLetters(word, letterGuess) {
+  //loopa igenom ordet för att de som någon bokstav stämmer överens
+  let found = false;
+  let indices = [];
+  const regex = /^[a-zA-Z]$/; //JAKOB
+
+  const notAcceptedChars = "!@#$%^&*()+=-[]\\';,./{}|\":<>?123456789";
   for (let i = 0; i < notAcceptedChars.length; i++) {
     // console.log(notAcceptedChars[i]);
     notAcceptedCharsArray.push(notAcceptedChars[i]);
   }
 
-  console.log(`Hangingman-ord: ${word}`);
+  for (let index = 0; index < word.length; index++) {
+    const letter = word[index];
 
-  for (const letter of word) {
     if (letterGuess === letter) {
       found = true;
-      console.log("Rätt!");
+      indices.push(index);
     }
   }
 
   if (found) {
     console.log("Rätt!");
+    indices.forEach((i) => {
+      letterPosition[i].innerText = letterGuess.toUpperCase();
+    });
   } else if (notAcceptedCharsArray.includes(letterGuess)) {
     console.log("inga sånna");
-  } else if (wrongLetterArray.indexOf(letterGuess) === -1) {
-    wrongLetterArray.push(letterGuess);
-    letterNoExistContainer.innerHTML += `<p>${letterGuess}</p>`;
-  } else {
-    alert(`${letterGuess} already exists, try another letter`);
-  }
 
-  console.log(wrongLetterArray);
+    // här SKA NÅT VARA!!! /jakob!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    // else if (containsLetter(letterGuess)) {
+    //     console.log("va true");
+    //   } else if (!containsLetter(letterGuess)) {
+    //     console.log("va false");
+    //   }
+  }
+  // JAKOB!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  else if (wrongLetterArray.indexOf(letterGuess) === -1) {
+    wrongLetterArray.push(letterGuess);
+    if (regex.test(letterGuess)) {
+      letterNoExistContainer.innerHTML += `<p>${letterGuess.toUpperCase()}</p>`;
+      // const nextItem = allItems.shift();
+    }
+
+    // if (nextItem) {
+    //   nextItem.style.display = "block";
+    // }
+    else {
+      alert(`${letterGuess} already exists, try another letter`);
+    }
+  }
+}
+
+function showGameOverPopup(hasWon) {
+  console.log("showGameOverPopup called");
+  const popup = document.querySelector(".game-over-popup");
+  const messageElement = document.getElementById("game-over-message");
+  const popupContent = document.querySelector(".popup-content");
+
+  if (hasWon) {
+    messageElement.textContent = "Grattis, du vann! 🎉";
+    popupContent.classList.add("popup__content--win");
+    popupContent.classList.remove("popup__content--loss");
+  } else {
+    messageElement.textContent = "Tyvärr, du förlorade. 😢";
+    popupContent.classList.add("popup__content--loss");
+    popupContent.classList.remove("popup__content--win");
+  }
+  popup.classList.remove("hidden");
+}
+
+function endGame(hasWon) {
+  console.log("endGame called");
+  showGameOverPopup(hasWon);
 }

@@ -9,8 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-    href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Exo:wght@100&family=Qwitcher+Grypen:wght@400;700&family=Rufina:wght@400;700&display=swap"
-    rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Exo:wght@100&family=Qwitcher+Grypen:wght@400;700&family=Rufina:wght@400;700&display=swap"
+      rel="stylesheet"
     />
     <script src="maria.js" type="module" defer></script>
     <!-- <script defer src="script.js"></script> -->
@@ -18,18 +18,22 @@
   <body>
     <header>
       <h1>Kung-Fu Dolphins Hängagubbe</h1>
+      <button class="start-button hidden">Starta Spelet</button>
+      <!-- <button class="start-button hidden">Starta Spelet</button> -->
     </header>
-    <button class="start-button hidden">Starta Spelet</button>
     <main class="main-content">
-      <section class="incorrect-letter-container">
-        <h1 class="incorrect-letter-container-header">Felaktiga bokstäver</h1>
-        <section class="incorrect-letter-container-letter-wrapper">
-          <p class="incorrect-letter-container-letter"></p>
+      <section class="incorrect-letter-container-wrapper">
+        <section class="incorrect-letter-container">
+          <h1 class="incorrect-letter-container-header">Felaktiga bokstäver</h1>
+          <section class="incorrect-letter-container-letter-wrapper">
+            <p class="incorrect-letter-container-letter"></p>
+          </section>
+        </section>
+        <section class="letter-message-container">
+          <p class="letter-message"></p>
         </section>
       </section>
-      <section class="letter-message-container">
-        <p class="letter-message"></p> <!-- TILLAGD för meddelande om upprepande av bokstav, rätt/fel osv -->
-      </section>
+
       <section class="correct-letter-container">
         <div class="correct-letter-container-letter letter-position-1"></div>
         <div class="correct-letter-container-letter letter-position-2"></div>

@@ -77,7 +77,7 @@ function compareLetters(word, letterGuess) {
   let found = false;
   let indices = [];
 
-  const notAcceptedChars = "!@#$%^&*()+=-[]\\';,./{}|\":<>?";
+  const notAcceptedChars = "!@#$%^&*()+=-[]\\';,./{}|\":<>?123456789";
   for (let i = 0; i < notAcceptedChars.length; i++) {
     // console.log(notAcceptedChars[i]);
     notAcceptedCharsArray.push(notAcceptedChars[i]);
@@ -102,7 +102,6 @@ function compareLetters(word, letterGuess) {
   } else if (wrongLetterArray.indexOf(letterGuess) === -1) {
     wrongLetterArray.push(letterGuess);
     letterNoExistContainer.innerHTML += `<p>${letterGuess.toUpperCase()}</p>`;
-
     console.log("Du gissade fel, försök igen!"); //LUCAS
     const nextItem = allItems.shift();
     if (nextItem) {
@@ -136,9 +135,3 @@ function endGame(hasWon) {
   console.log("endGame called");
   showGameOverPopup(hasWon);
 }
-
-//Att den bara tar emot bokstäver och inga spec-tecken - JAKOB
-// function containsLetter(str) {
-//     return /[a-zåäö]/i.test(str); //la till åäö!
-//   }
-//   containsLetter("'");
