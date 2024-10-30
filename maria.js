@@ -1,8 +1,9 @@
 
 const startButton = document.querySelector(".start-button");
-const wrongLetterArray = [];
+let currentWord = "";
 const acceptedChars = "abcdefghijklmnopqrstuvwxyzåäöABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ";
 const acceptedCharsArray = [];
+let wrongLetterArray = [];
 const letterNoExistContainer = document.querySelector(".incorrect-letter-container-letter");
 const letterGuessMessage = document.querySelector(".letter-message"); //NY
 const letterPosition = document.querySelectorAll('.correct-letter-container-letter')
@@ -15,7 +16,7 @@ const head = document.querySelector("#head");
 const body = document.querySelector("#body"); 
 const arms = document.querySelector("#arms");
 const legs = document.querySelector("#legs"); 
-const allItems = [ground, scaffold, head, body, arms, legs]
+let allItems = [ground, scaffold, head, body, arms, legs]
 let rightGuesses = [];
 
 ground.style.display = "none";
@@ -48,24 +49,29 @@ async function loadWords() {
     }
 }
 
+
 function startGame() {
     startButton.classList.remove('hidden');
     startButton.style.display = 'none';
+
+    document.removeEventListener('keydown', handleKeydown);
     
     loadWords().then(wordsArray => {
-        const randomWord = getRandomWord(wordsArray); 
-        console.log("Random word:", randomWord);
+        currentWord = getRandomWord(wordsArray); 
+        console.log("Random word:", currentWord);
         
-        displayLetterContainers(randomWord);
+        displayLetterContainers(currentWord);
 
-        document.addEventListener('keydown', (event) => {
-            console.log('Du gissade på: ' + event.key);
-            compareLetters(randomWord, event.key);
-        });
- 
+        document.addEventListener('keydown', handleKeydown);
+
     }).catch(error => {
         console.error("Failed to load words:", error);
     });
+}
+
+function handleKeydown(event) {
+        console.log('Du gissade på: ' + event.key);
+        compareLetters(currentWord, event.key);
 }
 
 function getRandomWord(wordArray) {
@@ -108,8 +114,9 @@ function compareLetters(word, letterGuess) {
         } else if (found) {
             letterGuessMessage.innerText = `RÄTT! Fortsätt så!`//NY
             indices.forEach(i => {
-            letterPosition[i].innerText = letterGuess.toUpperCase();})
-            rightGuesses.push(letterGuess)                
+            letterPosition[i].innerText = letterGuess.toUpperCase();
+            rightGuesses.push(letterGuess) 
+        })            
             
         } else if (wrongLetterArray.indexOf(letterGuess) === -1) {
             wrongLetterArray.push(letterGuess);
@@ -130,6 +137,8 @@ function compareLetters(word, letterGuess) {
 
 function examineWordGuess(rightGuesses, word) {//NY
     if(rightGuesses.length === word.length) {
+        console.log(rightGuesses, word.length);
+        
         showGameOverPopup('gamewon')
     } 
 }
@@ -144,7 +153,7 @@ function hangingMan(word) {
     }
 }
 
-function showGameOverPopup(hasWon, randomWord) {
+function showGameOverPopup(hasWon) {
     console.log("showGameOverPopup called");
     const popup = document.querySelector('.game-over-popup');
     const messageElement = document.getElementById('game-over-message');
@@ -162,7 +171,7 @@ function showGameOverPopup(hasWon, randomWord) {
     } else {
         console.log("ERRRRROR");
     }
-    rightWordElement.textContent = randomWord;
+    rightWordElement.textContent = currentWord;
     popup.classList.remove('hidden');
 }
 
@@ -196,12 +205,12 @@ function resetGame() {
     allItems = [ground, scaffold, head, body, arms, legs]
 
     // Återställ spelets statusvariabler
-    wrongLetterArray.length = 0;
+    currentWord = ""
+    wrongLetterArray = [];
+    rightGuesses = [];
 
 
     letterGuessMessage.innerText = '';
-    rightGuesses.length = 0;
-    wrongLetterArray = [];
     console.log(rightGuesses, wrongLetterArray);
     
     console.log("Game reset complete.");

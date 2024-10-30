@@ -46,13 +46,6 @@ header h1 {
   font-weight: bolder;
 }
 
-/* .correct-letter-container {
-  width: 30%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-} */
-
 .correct-letter-container {
   width: 40%;
   display: flex;
@@ -108,8 +101,9 @@ header h1 {
   text-align: center;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   flex-direction: column;
+  margin-bottom: 20rem;
 }
 
 .popup__content--win {
