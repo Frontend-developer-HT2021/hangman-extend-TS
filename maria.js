@@ -29,6 +29,7 @@ startButton.style.display = "block";
 
 
 
+
 startButton.addEventListener('click', startGame, async () => {
     const wordArray = await loadWords(); 
     const randomWord = getRandomWord(wordArray); 
@@ -54,7 +55,6 @@ function startGame() {
     startButton.classList.remove('hidden');
     startButton.style.display = 'none';
 
-    document.removeEventListener('keydown', handleKeydown);
     
     loadWords().then(wordsArray => {
         currentWord = getRandomWord(wordsArray); 
@@ -212,6 +212,8 @@ function resetGame() {
 
     letterGuessMessage.innerText = '';
     console.log(rightGuesses, wrongLetterArray);
+
+    document.removeEventListener('keydown', handleKeydown);
     
     console.log("Game reset complete.");
 }
