@@ -30,11 +30,9 @@ header h1 {
   color: rgb(60, 100, 159);
   background-color: black;
   padding: 1rem 1.7rem;
+  cursor: pointer;
 }
 
-.hidden {
-  display: none;
-}
 
 .main-content {
   height: 85vh;
@@ -115,7 +113,9 @@ header h1 {
   justify-content: center;
   align-items: center;
 }
-
+.hidden {
+  display: none;
+}
 .popup-content {
   display: flex;
   background-color: rgb(165, 165, 165);
@@ -125,8 +125,9 @@ header h1 {
   text-align: center;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   flex-direction: column;
+  margin-bottom: 20rem;
 }
 
 .popup__content--win {
@@ -135,6 +136,10 @@ header h1 {
 
 .popup__content--loss {
   background-color: lightcoral;
+}
+
+.start-over {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1330px) {

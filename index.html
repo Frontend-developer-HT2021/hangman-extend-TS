@@ -4,8 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hänga gubbe</title>
-
-    <script src="maria.js" defer></script>
+     <script src="script.js" defer></script>
     <link rel="stylesheet" href="./styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,22 +12,23 @@
       href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Exo:wght@100&family=Qwitcher+Grypen:wght@400;700&family=Rufina:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <!-- <script defer src="script.js"></script> -->
   </head>
   <body>
     <header>
       <h1>Kung-Fu Dolphins Hängagubbe</h1>
+      <button class="start-button hidden">Starta Spelet</button>
     </header>
-    <button class="start-button hidden">Starta Spelet</button>
     <main class="main-content">
-      <section class="incorrect-letter-container">
-        <h1 class="incorrect-letter-container-header">Felaktiga bokstäver</h1>
-        <section class="incorrect-letter-container-letter-wrapper">
-          <p class="incorrect-letter-container-letter"></p>
+      <section class="incorrect-letter-container-wrapper">
+        <section class="incorrect-letter-container">
+          <h1 class="incorrect-letter-container-header">Felaktiga bokstäver</h1>
+          <section class="incorrect-letter-container-letter-wrapper">
+            <p class="incorrect-letter-container-letter"></p>
+          </section>
         </section>
-      </section>
-      <section class="letter-message-container">
-        <p class="letter-message"></p>
+        <section class="letter-message-container">
+          <p class="letter-message"></p>
+        </section>
       </section>
       <section class="correct-letter-container">
         <div class="correct-letter-container-letter letter-position-1"></div>
@@ -93,7 +93,9 @@
       <div class="game-over-popup hidden">
         <div class="popup-content">
             <p id="game-over-message"></p>
-            <button onclick="resetGame()">Börja om</button>
+            <p>Det rätta ordet var:</p>
+            <p id="right-word"></p>
+            <button class="start-over">Börja om</button>
         </div>
       </div>
     </main>

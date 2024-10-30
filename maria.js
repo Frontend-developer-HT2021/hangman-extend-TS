@@ -72,6 +72,11 @@ function startGame() {
     });
 }
 
+function handleKeydown(event) {
+  console.log("Du gissade på: " + event.key);
+  compareLetters(currentWord, event.key);
+}
+
 function getRandomWord(wordArray) {
   let randomIndex = Math.floor(Math.random() * wordArray.length);
   return wordArray.splice(randomIndex, 1)[0];
@@ -108,7 +113,7 @@ function compareLetters(word, letterGuess) {
 
   if (acceptedCharsArray.includes(letterGuess)) {
     if (found && rightGuesses.includes(letterGuess)) {
-      //   letterGuessMessage.innerText = `${letterGuess.toUpperCase()} är redan vald, prova en annan bokstav!`; //NY
+      letterGuessMessage.innerText = `${letterGuess.toUpperCase()} är redan vald, prova en annan bokstav!`; //NY
     } else if (found) {
       letterGuessMessage.innerText = `RÄTT! Fortsätt så!`; //NY
       indices.forEach((i) => {
