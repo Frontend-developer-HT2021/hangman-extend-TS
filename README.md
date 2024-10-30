@@ -9,8 +9,8 @@ Att tänka på:
 1. <!-- HTML-fil med allting som behövs för programmet (klasser utifrån BEM) - JAKOB -->
     
 2. <!-- CSS - JAKOB och LUCAS -->
-    - Responsiv - JAKOB
-    - Styla meddelanderutan + flytta startknappen - JAKOB
+  <!--   - Responsiv - JAKOB
+    - Styla meddelanderutan + flytta startknappen - JAKOB -->
 
 3. JS:
    <!--  1. Array med ord - LUCAS -->
@@ -22,10 +22,10 @@ Att tänka på:
 <!-- 7a. Funktion som skriver ut bokstäverna på rätt plats i ordet, + rätt antal containers ska synas - Maria -->
 <!--  7b. Funktion som skriver ut vid fel bokstav - Jakob -->
 <!-- 8. Funktion som kollar om man vunnit eller förlorat - MARIA -->
-    9. Reset-knapp för att börja om från början + onclick>addeventlistener - LUCAS & MARIA (fortsättning)
+<!-- 9. Reset-knapp för att börja om från början + onclick>addeventlistener - LUCAS & MARIA (fortsättning) -->
 <!--     10. Att den bara tar emot bokstäver och inga spec-tecken - JAKOB -->
 <!--     11. Ändra från små till stora bokstäver - MARIA -->
-12. Ifall användaren inte hinner gissa rätt ska en ”Du förlorade”-skärm visas med det rätta ordet och en fråga om man vill spela igen. - LUCAS
+<!-- 12. Ifall användaren inte hinner gissa rätt ska en ”Du förlorade”-skärm visas med det rätta ordet och en fråga om man vill spela igen. - LUCAS -->
 
 
 
