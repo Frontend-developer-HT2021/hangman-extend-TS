@@ -10,31 +10,59 @@ body {
   padding: 2rem;
 }
 
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 15vh;
+}
+
 header h1 {
   text-align: center;
 }
+.start-button {
+  display: block;
+  border-radius: 2rem;
+  border: 2px solid rgb(60, 100, 159);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgb(60, 100, 159);
+  background-color: black;
+  padding: 1rem 1.7rem;
+}
+
+.hidden {
+  display: none;
+}
 
 .main-content {
-  height: 80vh;
+  height: 85vh;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
+.incorrect-letter-container-wrapper {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 .incorrect-letter-container {
-  width: 25%;
+  width: 400px;
   padding: 1rem;
-  height: 40%;
+  min-height: 500px;
   border-radius: 2rem;
   border: 3px solid black;
 }
+
 .incorrect-letter-container-header {
   text-align: center;
+  font-size: 1.5rem;
 }
-/* .incorrect-letter-container-letter-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-} */
+
 .incorrect-letter-container-letter {
   font-size: 1.5rem;
   display: flex;
@@ -42,8 +70,13 @@ header h1 {
 }
 .incorrect-letter-container-letter p {
   margin: 0.75rem;
-  font-size: 2.5rem;
-  font-weight: bolder;
+  font-size: 3rem;
+}
+
+.letter-message {
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 700;
 }
 
 .correct-letter-container {
@@ -70,7 +103,6 @@ header h1 {
 }
 .incorrect-letter-img-content {
   width: 90%;
-  height: 100%;
 }
 .game-over-popup {
   position: fixed;
@@ -82,14 +114,6 @@ header h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-} 
-
-.hidden {
-  display: none;
-}
-
-.start-button {
-  display: block;
 }
 
 .popup-content {
@@ -111,29 +135,35 @@ header h1 {
 }
 
 .popup__content--loss {
-  background-color: lightcoral
+  background-color: lightcoral;
 }
 
 @media screen and (max-width: 1330px) {
   .main-content {
     flex-direction: column;
     align-items: center;
-    height: 90vh;
   }
   .incorrect-letter-container {
-    width: 70%;
-    height: 30%;
+    min-height: 200px;
   }
   .correct-letter-container {
     width: 80%;
+    height: 20%;
   }
   .incorrect-letter-img {
-    width: 50%;
     height: 40%;
+  }
+  .incorrect-letter-img-content {
+    height: 95%;
   }
   .correct-letter-container-letter {
     width: 4.5rem;
     height: 4.5rem;
+  }
+  .incorrect-letter-container-wrapper {
+    width: 100%;
+    align-items: center;
+    height: 40%;
   }
 }
 
