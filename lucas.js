@@ -134,7 +134,7 @@ function examineWordGuess(rightGuesses, word) {//NY
     } 
 }
 
-function hangingMan(word) {//NY
+function hangingMan(word) {
     const nextItem = allItems.shift();
     if (nextItem && allItems.length === 0) {
         nextItem.style.display = "block";

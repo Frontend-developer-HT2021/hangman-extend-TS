@@ -115,7 +115,7 @@ function compareLetters(word, letterGuess) {
             wrongLetterArray.push(letterGuess);
             letterGuessMessage.innerText = `${letterGuess.toUpperCase()} finns inte med i ordet, prova igen!` //NY
             letterNoExistContainer.innerHTML += `<p>${letterGuess.toUpperCase()}</p>`;
-            hangingMan() //NY
+            hangingMan(word) //NY
             
         } else {
             letterGuessMessage.innerText = `${letterGuess.toUpperCase()} är redan vald, prova en annan bokstav!` //NY
@@ -134,22 +134,23 @@ function examineWordGuess(rightGuesses, word) {//NY
     } 
 }
 
-function hangingMan() {//NY
+function hangingMan(word) {
     const nextItem = allItems.shift();
     if (nextItem && allItems.length === 0) {
         nextItem.style.display = "block";
-        showGameOverPopup ('gamelost')
+        showGameOverPopup ('gamelost', word)
     } else if (nextItem) {
     nextItem.style.display = "block";                
     }
 }
 
-function showGameOverPopup(hasWon) {
+function showGameOverPopup(hasWon, randomWord) {
     console.log("showGameOverPopup called");
     const popup = document.querySelector('.game-over-popup');
     const messageElement = document.getElementById('game-over-message');
     const popupContent = document.querySelector('.popup-content');
-    
+    const rightWordElement = document.getElementById('right-word');
+
     if (hasWon === 'gamewon') {
         messageElement.textContent = "Grattis, du vann! 🎉";
         popupContent.classList.add('popup__content--win');
@@ -159,8 +160,9 @@ function showGameOverPopup(hasWon) {
         popupContent.classList.add('popup__content--loss');
         popupContent.classList.remove('popup__content--win'); 
     } else {
-        console.log("ERRRRROR")
+        console.log("ERRRRROR");
     }
+    rightWordElement.textContent = randomWord;
     popup.classList.remove('hidden');
 }
 
@@ -173,14 +175,12 @@ function resetGame() {
     const popup = document.querySelector('.game-over-popup');
     popup.classList.add('hidden');
 
-    // Visa startknappen
     startButton.classList.remove('hidden');
     startButton.style.display = 'block';
 
-    // Återställ UI-element
     letterPosition.forEach(element => {
-        element.style.display = "none"; // Dölj varje bokstavscontainer
-        element.innerText = '';         // Återställ text
+        element.style.display = "none"; 
+        element.innerText = '';         
     });
 
     // Rensa felaktiga gissningar
@@ -193,13 +193,16 @@ function resetGame() {
     body.style.display = "none";
     arms.style.display = "none";
     legs.style.display = "none";
+    allItems = [ground, scaffold, head, body, arms, legs]
 
     // Återställ spelets statusvariabler
     wrongLetterArray.length = 0;
 
+
+    letterGuessMessage.innerText = '';
+    rightGuesses.length = 0;
+    wrongLetterArray = [];
+    console.log(rightGuesses, wrongLetterArray);
+    
     console.log("Game reset complete.");
-
-
-    //TA BORT MEDDELANDE-CONTAINER
-    //TA BORT HÄNGANDE GUBBEN
 }
