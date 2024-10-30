@@ -3,6 +3,7 @@
   margin: 0;
   font-family: "Exo", serif;
 }
+
 body {
   background-color: rgb(60, 100, 159);
   height: 100vh;
@@ -12,12 +13,14 @@ body {
 header h1 {
   text-align: center;
 }
+
 .main-content {
   height: 80vh;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
+
 .incorrect-letter-container {
   width: 25%;
   padding: 1rem;
@@ -76,7 +79,6 @@ header h1 {
   width: 90%;
   height: 100%;
 }
-
 .game-over-popup {
   position: fixed;
   top: 0;
@@ -87,10 +89,14 @@ header h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} 
 
 .hidden {
   display: none;
+}
+
+.start-button {
+  display: block;
 }
 
 .popup-content {
@@ -111,7 +117,7 @@ header h1 {
 }
 
 .popup__content--loss {
-  background-color: lightcoral;
+  background-color: lightcoral
 }
 
 @media screen and (max-width: 1330px) {

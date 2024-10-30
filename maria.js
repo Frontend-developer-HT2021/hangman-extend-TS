@@ -75,8 +75,12 @@ function getRandomWord(wordArray) {
 
 function displayLetterContainers(randomWord) {
     for (let letterContainerIndex = 0; letterContainerIndex < randomWord.length; letterContainerIndex++) {
-        letterPosition[letterContainerIndex].style.display = "block"
+        letterPosition[letterContainerIndex].style.display = "flex";
+        letterPosition[letterContainerIndex].style.justifyContent = "center";
+        letterPosition[letterContainerIndex].style.alignItems = "center";
     }
+
+
 }
 
 function compareLetters(word, letterGuess) {
@@ -119,6 +123,7 @@ function compareLetters(word, letterGuess) {
     } else {
          letterGuessMessage.innerText = `Inga specialtecken eller siffror! Prova igen!`
     }    
+
     examineWordGuess(rightGuesses, word) //NY
 
 }
@@ -126,42 +131,37 @@ function compareLetters(word, letterGuess) {
 function examineWordGuess(rightGuesses, word) {//NY
     if(rightGuesses.length === word.length) {
         showGameOverPopup('gamewon')
-        resetGame()
     } 
 }
 
 function hangingMan() {//NY
     const nextItem = allItems.shift();
-    if (nextItem && allItems.length == 0) {
+    if (nextItem && allItems.length === 0) {
         nextItem.style.display = "block";
         showGameOverPopup ('gamelost')
-        resetGame()
     } else if (nextItem) {
     nextItem.style.display = "block";                
     }
 }
 
-
-function showGameOverPopup(gameOver) {
-console.log("showGameOverPopup called");
-const popup = document.querySelector('.game-over-popup');
-const messageElement = document.getElementById('game-over-message');
-const popupContent = document.querySelector('.popup-content');
-
-if (gameOver === 'gamewon') {
-    messageElement.textContent = "Grattis, du vann! 🎉";
-    popupContent.classList.add('popup__content--win');
-    popupContent.classList.remove('popup__content--loss');
-} else if (gameOver === 'gamelost'){
-    messageElement.textContent = "Tyvärr, du förlorade. 😢";
-    popupContent.classList.add('popup__content--loss');
-    popupContent.classList.remove('popup__content--win'); 
-} else {
-    console.log('errrrror')
-}
-
-
-popup.classList.remove('hidden');
+function showGameOverPopup(hasWon) {
+    console.log("showGameOverPopup called");
+    const popup = document.querySelector('.game-over-popup');
+    const messageElement = document.getElementById('game-over-message');
+    const popupContent = document.querySelector('.popup-content');
+    
+    if (hasWon === 'gamewon') {
+        messageElement.textContent = "Grattis, du vann! 🎉";
+        popupContent.classList.add('popup__content--win');
+        popupContent.classList.remove('popup__content--loss');
+    } else if (hasWon === 'gamelost'){
+        messageElement.textContent = "Tyvärr, du förlorade. 😢";
+        popupContent.classList.add('popup__content--loss');
+        popupContent.classList.remove('popup__content--win'); 
+    } else {
+        console.log("ERRRRROR")
+    }
+    popup.classList.remove('hidden');
 }
 
 
@@ -187,12 +187,19 @@ function resetGame() {
     letterNoExistContainer.innerHTML = '';
 
     // Återställ alla delar av galgen
-    allItems.forEach(item => {
-        item.style.display = 'none';
-    });
+    ground.style.display = "none";
+    scaffold.style.display = "none";
+    head.style.display = "none";
+    body.style.display = "none";
+    arms.style.display = "none";
+    legs.style.display = "none";
 
     // Återställ spelets statusvariabler
     wrongLetterArray.length = 0;
 
     console.log("Game reset complete.");
+
+
+    //TA BORT MEDDELANDE-CONTAINER
+    //TA BORT HÄNGANDE GUBBEN
 }

@@ -27,6 +27,9 @@
           <p class="incorrect-letter-container-letter"></p>
         </section>
       </section>
+      <section class="letter-message-container">
+        <p class="letter-message"></p>
+      </section>
       <section class="correct-letter-container">
         <div class="correct-letter-container-letter letter-position-1"></div>
         <div class="correct-letter-container-letter letter-position-2"></div>
@@ -87,6 +90,12 @@
           />
         </svg>
       </section>
+      <div class="game-over-popup hidden">
+        <div class="popup-content">
+            <p id="game-over-message"></p>
+            <button onclick="resetGame()">Börja om</button>
+        </div>
+      </div>
     </main>
   </body>
 </html>
