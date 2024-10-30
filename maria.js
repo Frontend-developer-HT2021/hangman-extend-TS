@@ -1,7 +1,8 @@
 
 const startButton = document.querySelector(".start-button");
 const wrongLetterArray = [];
-const notAcceptedCharsArray = [];
+const acceptedChars = "abcdefghijklmnopqrstuvwxyzåäöABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ";
+const acceptedCharsArray = [];
 const letterNoExistContainer = document.querySelector(".incorrect-letter-container-letter");
 const letterGuessMessage = document.querySelector(".letter-message"); //NY
 const letterPosition = document.querySelectorAll('.correct-letter-container-letter')
@@ -61,7 +62,7 @@ function startGame() {
             console.log('Du gissade på: ' + event.key);
             compareLetters(randomWord, event.key);
         });
-        
+ 
     }).catch(error => {
         console.error("Failed to load words:", error);
     });
@@ -81,12 +82,11 @@ function displayLetterContainers(randomWord) {
 function compareLetters(word, letterGuess) {
     let found = false
     let indices = []
-    const notAcceptedChars = "!@#$%^&*()+=-[]\\';,./{}|\":<>?";
 
-
-    for (let i = 0; i < notAcceptedChars.length; i++) {
-    notAcceptedCharsArray.push(notAcceptedChars[i]);
+    for (let i = 0; i < acceptedChars.length; i++) {
+    acceptedCharsArray.push(acceptedChars[i]);
     }
+
 
     for (let index = 0; index < word.length; index++){
         const letter = word[index]
@@ -96,35 +96,37 @@ function compareLetters(word, letterGuess) {
             indices.push(index) 
         }
     }
-    
-    if (found && rightGuesses.includes(letterGuess)) {
-        letterGuessMessage.innerText = `${letterGuess.toUpperCase()} är redan vald, prova en annan bokstav!` //NY
 
-    } else if (found) {
-        letterGuessMessage.innerText = `RÄTT! Fortsätt så!`//NY
-        indices.forEach(i => {
-        letterPosition[i].innerText = letterGuess.toUpperCase();})
-        rightGuesses.push(letterGuess)                
-        
-    } else if (notAcceptedCharsArray.includes(letterGuess)) {
-        letterGuessMessage.innerText = `Inga specialtecken eller siffror! Prova igen!` //NY
-        
-    } else if (wrongLetterArray.indexOf(letterGuess) === -1) {
-        wrongLetterArray.push(letterGuess);
-        letterGuessMessage.innerText = `${letterGuess.toUpperCase()} finns inte med i ordet, prova igen!` //NY
-        letterNoExistContainer.innerHTML += `<p>${letterGuess.toUpperCase()}</p>`;
-        hangingMan() //NY
-        
+    if (acceptedCharsArray.includes(letterGuess)) {
+        if (found && rightGuesses.includes(letterGuess)) {
+            letterGuessMessage.innerText = `${letterGuess.toUpperCase()} är redan vald, prova en annan bokstav!` //NY
+
+        } else if (found) {
+            letterGuessMessage.innerText = `RÄTT! Fortsätt så!`//NY
+            indices.forEach(i => {
+            letterPosition[i].innerText = letterGuess.toUpperCase();})
+            rightGuesses.push(letterGuess)                
+            
+        } else if (wrongLetterArray.indexOf(letterGuess) === -1) {
+            wrongLetterArray.push(letterGuess);
+            letterGuessMessage.innerText = `${letterGuess.toUpperCase()} finns inte med i ordet, prova igen!` //NY
+            letterNoExistContainer.innerHTML += `<p>${letterGuess.toUpperCase()}</p>`;
+            hangingMan() //NY
+            
+        } else {
+            letterGuessMessage.innerText = `${letterGuess.toUpperCase()} är redan vald, prova en annan bokstav!` //NY
+        }
     } else {
-        letterGuessMessage.innerText = `${letterGuess.toUpperCase()} är redan vald, prova en annan bokstav!` //NY
-    }
-    
+         letterGuessMessage.innerText = `Inga specialtecken eller siffror! Prova igen!`
+    }    
     examineWordGuess(rightGuesses, word) //NY
+
 }
 
 function examineWordGuess(rightGuesses, word) {//NY
     if(rightGuesses.length === word.length) {
         showGameOverPopup('gamewon')
+        resetGame()
     } 
 }
 
@@ -133,16 +135,12 @@ function hangingMan() {//NY
     if (nextItem && allItems.length == 0) {
         nextItem.style.display = "block";
         showGameOverPopup ('gamelost')
+        resetGame()
     } else if (nextItem) {
     nextItem.style.display = "block";                
     }
 }
 
-//TA BORT
-/* function endGame(hasWon) {
-    console.log("endGame called");
-    showGameOverPopup(hasWon);
-} */ 
 
 function showGameOverPopup(gameOver) {
 console.log("showGameOverPopup called");
@@ -164,4 +162,37 @@ if (gameOver === 'gamewon') {
 
 
 popup.classList.remove('hidden');
+}
+
+
+// Återställ spelet till startläget
+function resetGame() {
+    console.log("Resetting game...");
+
+    // Dölj game-over popup
+    const popup = document.querySelector('.game-over-popup');
+    popup.classList.add('hidden');
+
+    // Visa startknappen
+    startButton.classList.remove('hidden');
+    startButton.style.display = 'block';
+
+    // Återställ UI-element
+    letterPosition.forEach(element => {
+        element.style.display = "none"; // Dölj varje bokstavscontainer
+        element.innerText = '';         // Återställ text
+    });
+
+    // Rensa felaktiga gissningar
+    letterNoExistContainer.innerHTML = '';
+
+    // Återställ alla delar av galgen
+    allItems.forEach(item => {
+        item.style.display = 'none';
+    });
+
+    // Återställ spelets statusvariabler
+    wrongLetterArray.length = 0;
+
+    console.log("Game reset complete.");
 }
