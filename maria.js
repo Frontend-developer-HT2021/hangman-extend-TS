@@ -1,14 +1,13 @@
-
 const startButton = document.querySelector(".start-button");
 let currentWord = "";
 const acceptedChars = "abcdefghijklmnopqrstuvwxyzåäöABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ";
 const acceptedCharsArray = [];
 let wrongLetterArray = [];
 const letterNoExistContainer = document.querySelector(".incorrect-letter-container-letter");
-const letterGuessMessage = document.querySelector(".letter-message"); //NY
+const letterGuessMessage = document.querySelector(".letter-message");
 const letterPosition = document.querySelectorAll('.correct-letter-container-letter')
 letterPosition.forEach(element => element.style.display = "none");
-
+const resetBtn = document.querySelector('.start-over')
 
 const ground = document.querySelector("#ground");
 const scaffold = document.querySelector("#scaffold");
@@ -29,7 +28,7 @@ startButton.style.display = "block";
 
 
 
-
+resetBtn.addEventListener('click', resetGame)
 startButton.addEventListener('click', startGame, async () => {
     const wordArray = await loadWords(); 
     const randomWord = getRandomWord(wordArray); 
@@ -50,10 +49,9 @@ async function loadWords() {
     }
 }
 
-
 function startGame() {
-    startButton.classList.remove('hidden');
-    startButton.style.display = 'none';
+/*     startButton.classList.remove('hidden'); */
+    startButton.style.visibility = 'hidden';
 
     
     loadWords().then(wordsArray => {
@@ -112,7 +110,7 @@ function compareLetters(word, letterGuess) {
             letterGuessMessage.innerText = `${letterGuess.toUpperCase()} är redan vald, prova en annan bokstav!` //NY
 
         } else if (found) {
-            letterGuessMessage.innerText = `RÄTT! Fortsätt så!`//NY
+            letterGuessMessage.innerText = `RÄTT! Fortsätt så!`
             indices.forEach(i => {
             letterPosition[i].innerText = letterGuess.toUpperCase();
             rightGuesses.push(letterGuess) 
@@ -122,7 +120,7 @@ function compareLetters(word, letterGuess) {
             wrongLetterArray.push(letterGuess);
             letterGuessMessage.innerText = `${letterGuess.toUpperCase()} finns inte med i ordet, prova igen!` //NY
             letterNoExistContainer.innerHTML += `<p>${letterGuess.toUpperCase()}</p>`;
-            hangingMan(word) //NY
+            hangingMan(word) 
             
         } else {
             letterGuessMessage.innerText = `${letterGuess.toUpperCase()} är redan vald, prova en annan bokstav!` //NY
@@ -131,11 +129,11 @@ function compareLetters(word, letterGuess) {
          letterGuessMessage.innerText = `Inga specialtecken eller siffror! Prova igen!`
     }    
 
-    examineWordGuess(rightGuesses, word) //NY
+    examineWordGuess(rightGuesses, word) 
 
 }
 
-function examineWordGuess(rightGuesses, word) {//NY
+function examineWordGuess(rightGuesses, word) {
     if(rightGuesses.length === word.length) {
         console.log(rightGuesses, word.length);
         

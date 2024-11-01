@@ -1,70 +1,201 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: math;
-  }
-  body {
-    background-color: green;
-    height: 100vh;
-    padding: 2rem;
-  }
-  header {
-    margin-top: 4rem;
-  }
-  header h1 {
-    text-align: center;
-  }
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "Exo", serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(60, 100, 159);
+  height: 100vh;
+  padding: 2rem;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 15vh;
+}
+
+header h1 {
+  text-align: center;
+}
+.start-button {
+  visibility: visible;
+  display: block;
+  border-radius: 2rem;
+  width: 15rem;
+  margin: .5rem auto .5rem auto;
+  border: 2px solid rgb(60, 100, 159);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgb(60, 100, 159);
+  background-color: black;
+  padding: 1rem 1.7rem;
+  cursor: pointer;
+}
+
+
+.main-content {
+  height: 85vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.incorrect-letter-container-wrapper {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.incorrect-letter-container {
+  width: 400px;
+  padding: 1rem;
+  min-height: 500px;
+  border-radius: 2rem;
+  border: 3px solid black;
+}
+
+.incorrect-letter-container-header {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.incorrect-letter-container-letter {
+  font-size: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+.incorrect-letter-container-letter p {
+  margin: 0.75rem;
+  font-size: 3rem;
+}
+.letter-message-container{
+  display: block;
+  margin: .3rem;
+  width: 400px;
+  min-height: 2rem;
+}
+
+.letter-message {
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.correct-letter-container {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.correct-letter-container-letter {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  border: 3px solid black;
+  border-radius: 0.5rem;
+  width: 5rem;
+  height: 5rem;
+  font-size: 2.5rem;
+  font-weight: bolder;
+}
+
+.incorrect-letter-img {
+  width: 25%;
+}
+.incorrect-letter-img-content {
+  width: 90%;
+}
+.game-over-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.76);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hidden {
+  display: none;
+}
+.popup-content {
+  display: flex;
+  background-color: rgb(165, 165, 165);
+  width: 20rem;
+  height: 10rem;
+  border-radius: 5px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: column;
+  margin-bottom: 20rem;
+}
+
+.popup__content--win {
+  background-color: lightgreen;
+}
+
+.popup__content--loss {
+  background-color: lightcoral;
+}
+
+.start-over {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1330px) {
   .main-content {
-    margin-top: 4rem;
-    display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
   }
   .incorrect-letter-container {
-    width: 25%;
-    padding: 1rem;
-    border: 3px solid black;
-  }
-  .incorrect-letter-container-header {
-    text-align: center;
-  }
-  
-  .incorrect-letter-container-letter {
-    font-size: 5rem;
-    margin: 0.5rem;
-    display: flex;
-    display: flex;
-    flex-wrap: wrap;
+    min-height: 200px;
   }
   .correct-letter-container {
-    width: 40%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-  }
-  .correct-letter-container-letter {
-    display: flex;
-   
-    border: 3px solid black;
-    border-radius: .5rem;
-    width: 5rem;
-    height: 5rem;
-    font-family: monospace;
-    font-size: 3rem;
+    width: 80%;
+    height: 20%;
   }
   .incorrect-letter-img {
-    width: 25%;
+    height: 40%;
+  }
+
+  .letter-message-container {
+    height: 5rem;
   }
   .incorrect-letter-img-content {
-    width: 80%;
+    height: 20rem;
   }
-  
-  #ground,
-  #head,
-  #body,
-  #arms,
-  #legs,
-  #scaffold {
-    display: none;
+
+  .correct-letter-container-letter {
+    width: 4.5rem;
+    height: 4.5rem;
   }
-  
+  .incorrect-letter-container-wrapper {
+    width: 100%;
+    align-items: center;
+    height: 40%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .correct-letter-container-letter {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .correct-letter-container-letter {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}

@@ -1,3 +1,4 @@
+//GLOBALA VARIABLER
 const startButton = document.querySelector(".start-button");
 let currentWord = "";
 const acceptedChars = "abcdefghijklmnopqrstuvwxyzåäöABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ";
@@ -27,8 +28,10 @@ legs.style.display = "none";
 startButton.style.display = "block";
 
 
-
+//RESET
 resetBtn.addEventListener('click', resetGame)
+
+//START HÄMTA ORDLISTA - LUCAS
 startButton.addEventListener('click', startGame, async () => {
     const wordArray = await loadWords(); 
     const randomWord = getRandomWord(wordArray); 
@@ -67,6 +70,7 @@ function startGame() {
     });
 }
 
+// JAKOB
 function handleKeydown(event) {
         console.log('Du gissade på: ' + event.key);
         compareLetters(currentWord, event.key);
@@ -87,6 +91,7 @@ function displayLetterContainers(randomWord) {
 
 }
 
+// MARIA
 function compareLetters(word, letterGuess) {
     let found = false
     let indices = []
@@ -130,9 +135,9 @@ function compareLetters(word, letterGuess) {
     }    
 
     examineWordGuess(rightGuesses, word) 
-
 }
 
+//
 function examineWordGuess(rightGuesses, word) {
     if(rightGuesses.length === word.length) {
         console.log(rightGuesses, word.length);
@@ -151,6 +156,7 @@ function hangingMan(word) {
     }
 }
 
+// LUCAS
 function showGameOverPopup(hasWon) {
     console.log("showGameOverPopup called");
     const popup = document.querySelector('.game-over-popup');
@@ -174,7 +180,7 @@ function showGameOverPopup(hasWon) {
 }
 
 
-// Återställ spelet till startläget
+// Återställ spelet till startläget //JAKOB
 function resetGame() {
     console.log("Resetting game...");
 
